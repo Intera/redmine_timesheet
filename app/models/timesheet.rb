@@ -37,9 +37,8 @@ class Timesheet
       self.activities = options[:activities].collect do |activity_id|
         # Include project-overridden activities
         activity = TimeEntryActivity.find(activity_id)
-        project_activities = TimeEntryActivity.where(['parent_id IN (?)', activity.id]) if activity.parent_id.nil?
+        project_activities = TimeEntryActivity.where(['parent_id in (?)', activity.id]) if activity.parent_id.nil?
         project_activities ||= []
-
         [activity.id.to_i] + project_activities.collect(&:id)
       end.flatten.uniq.compact
     else
@@ -221,30 +220,32 @@ class Timesheet
   end
 
   # Array of users to find
-  # String of extra conditions to add onto the query (AND)
+  # String of extra conditions to add onto the query (and)
   def conditions(users, extra_conditions=nil)
     if self.potential_time_entry_ids.empty?
       if self.date_from.present? && self.date_to.present?
-        conditions = ["spent_on >= (:from) AND spent_on <= (:to) AND #{TimeEntry.table_name}.project_id IN (:projects) AND user_id IN (:users) AND activity_id IN (:activities)",
+        projects = self.projects.map{|e| e[:id]}
+        conditions = ["spent_on >= (:from) and spent_on <= (:to) and #{TimeEntry.table_name}.project_id in (:projects) and user_id in (:users) and activity_id in (:activities)",
           {
             :from => self.date_from,
             :to => self.date_to,
-            :projects => self.projects,
+            :projects => projects,
             :activities => self.activities,
             :groups => self.groups,
             :users => users
           }]
       else # All time
-        conditions = ["#{TimeEntry.table_name}.project_id IN (:projects) AND user_id IN (:users) AND activity_id IN (:activities)",
+        projects = self.projects.map{|e| e[:id]}
+        conditions = ["#{TimeEntry.table_name}.project_id in (:projects) and user_id in (:users) and activity_id in (:activities)",
           {
-            :projects => self.projects,
+            :projects => projects,
             :activities => self.activities,
             :groups => self.groups,
             :users => users
           }]
       end
     else
-      conditions = ["user_id IN (:users) AND #{TimeEntry.table_name}.id IN (:potential_time_entries)",
+      conditions = ["user_id in (:users) and #{TimeEntry.table_name}.id in (:potential_time_entries)",
         {
           :users => users,
           :potential_time_entries => self.potential_time_entry_ids
@@ -252,7 +253,7 @@ class Timesheet
     end
 
     if extra_conditions
-      conditions[0] = conditions.first + ' AND ' + extra_conditions
+      conditions[0] = conditions.first + ' and ' + extra_conditions
     end
 
     Redmine::Hook.call_hook(:plugin_timesheet_model_timesheet_conditions, { :timesheet => self, :conditions => conditions})
