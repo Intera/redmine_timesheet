@@ -26,13 +26,13 @@
         <%= render :partial => 'timesheet_group', :locals => {:entry => entry, :name => entryname, :total => @total[entryname] } %>
       <% when :date %>
         <%#*entry[:logs].each do |log|%>
-        <% logger.debug "#{'*'*100}\n ENTRYNAME > #{entryname.to_yaml} ENTRY #{entry[:logs][0].id}\n#{'*'*100}"%> 
+        <% logger.debug "#{'*'*100}\n ENTRYNAME > #{entryname.to_yaml} ENTRY #{entry[:logs][0].id}\n#{'*'*100}"%>
 
         <h3><%= toggle_issue_arrows_date(entryname) %><%= h entryname -%> (<%= h number_with_precision(@total[entryname], :precision => @precision) %> <%= h(l(:field_hours)) -%>)</h3>
 
         <span class="<%= cycle("odd", "even") %> issue-time-entry-<%= entryname -%>" style="display:none;">
           <%= render :partial => 'timesheet_group', :locals => {:entry => entry, :name => entryname, :total => @total[entryname] } %>
-        </span> 
+        </span>
 
         <%#*end%>
         <script type="text/javascript">
@@ -58,7 +58,7 @@
         </script>
       <% else %>
         <%# Default to :project %>
-        <h3><%= h entryname -%> (<%= h number_with_precision(@total[entryname], :precision => @precision) %> <%= h(l(:field_hours)) -%>) <%= showing_users(entry[:users]) %></h3> 
+        <h3><%= h entryname -%> (<%= h number_with_precision(@total[entryname], :precision => @precision) %> <%= h(l(:field_hours)) -%>) <%= showing_users(entry[:users]) %></h3>
         <%= render :partial => 'timesheet_group', :locals => {:entry => entry, :name => entryname, :total => @total[entryname] } %>
 
       <% end
@@ -70,7 +70,7 @@
 <% content_for(:header_tags) do %>
   <%= javascript_include_tag 'context_menu' %>
   <%= stylesheet_link_tag 'context_menu' %>
-  <%= stylesheet_link_tag 'timesheet.css', :plugin => 'redmine_timesheet_plugin', :media => 'all' %>
+  <%= stylesheet_link_tag 'timesheet.css', :plugin => 'redmine_timesheet_plugin' %>
   <%= stylesheet_link_tag 'timesheet-print.css', :plugin => 'redmine_timesheet_plugin', :media => 'print' %>
   <%= javascript_include_tag 'timesheet.js', :plugin => 'redmine_timesheet_plugin' %>
   <%= call_hook(:plugin_timesheet_views_timesheets_report_header_tags, { :timesheet => @timesheet }) %>

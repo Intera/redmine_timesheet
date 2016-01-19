@@ -17,7 +17,6 @@ object_to_prepare.to_prepare do
   Project.send(:include, RedmineTimesheetPlugin::Patches::ProjectPatch)
   User.send(:include, RedmineTimesheetPlugin::Patches::UserPatch)
   TimeEntry.send(:include, RedmineTimesheetPlugin::Patches::TimeEntryPatch)
-
   # Needed for the compatibility check
   begin
     require_dependency 'time_entry_activity'
@@ -33,21 +32,17 @@ unless Redmine::Plugin.registered_plugins.keys.include?(:redmine_timesheet_plugi
     description 'This is a Timesheet plugin for Redmine to show timelogs for all projects'
     url 'http://github.com/arkhitech/redmine_timesheet_plugin'
     author_url 'https://github.com/arkhitech'
-
     version '0.7.0'
     requires_redmine :version_or_higher => '2.0.0'
-
     settings(:default => {
                'list_size' => '5',
                'precision' => '2',
                'project_status' => 'active',
                'user_status' => 'active'
              }, :partial => 'settings/timesheet_settings')
-
     project_module :timesheet do
 	    permission :see_all_timesheets, {}
     end
-
     menu(:top_menu,
          :timesheet,
          {:controller => :timesheet, :action => :index},

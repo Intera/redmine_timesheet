@@ -1,3 +1,22 @@
+body {
+  font-size: 10px;
+}
+
+table.list td {
+  padding: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+table.list td, table.list th {
+  text-align: left;
+}
+table.list th {
+  padding: 0;
+  padding-bottom: 4px;
+  font-weight: bold;
+}
+
 #footer,
 #top-menu,
 #header,
@@ -20,12 +39,10 @@ h2,
 	display: none;
 }
 
-tr.total {
-	display: table-row;
-}
-
 tr.total td {
   font-weight: bold;
+  padding-top: 0;
+  height: 24px;
 }
 
 #time_entries a {
@@ -48,6 +65,11 @@ h3:first-of-type {
 * {
 	border: 0 !important;
 	background-color: #fff !important;
+}
+
+tr.total {
+	display: table-row;
+  border-top: 1px solid #ddd !important;
 }
 
 table * {
