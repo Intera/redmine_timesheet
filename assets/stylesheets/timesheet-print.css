@@ -4,8 +4,8 @@ body {
 
 table.list td {
   padding: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 table.list td, table.list th {
