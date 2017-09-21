@@ -20,7 +20,7 @@ class FilterAllowedProjectsByStatusTest < ActionController::IntegrationTest
 
   context "with project_status configured to all" do
     setup do
-      Setting.plugin_redmine_timesheet_plugin = {'project_status' => 'all'}
+      Setting.plugin_redmine_timesheet = {'project_status' => 'all'}
     end
     
     context "as an admin" do
@@ -61,7 +61,7 @@ class FilterAllowedProjectsByStatusTest < ActionController::IntegrationTest
 
   context "with project_status configured to active" do
     setup do
-      Setting.plugin_redmine_timesheet_plugin = {'project_status' => 'active'}
+      Setting.plugin_redmine_timesheet = {'project_status' => 'active'}
     end
     
     context "as an admin" do

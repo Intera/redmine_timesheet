@@ -46,9 +46,7 @@ class TimesheetController < ApplicationController
     end
 
     call_hook(:plugin_timesheet_controller_report_pre_fetch_time_entries, { :timesheet => @timesheet, :params => params })
-
     save_filters_to_session(@timesheet)
-
     @timesheet.fetch_time_entries
 
     # Sums
@@ -105,11 +103,11 @@ class TimesheetController < ApplicationController
 
   private
   def get_list_size
-    @list_size = Setting.plugin_redmine_timesheet_plugin['list_size'].to_i
+    @list_size = Setting.plugin_redmine_timesheet['list_size'].to_i
   end
 
   def get_precision
-    precision = Setting.plugin_redmine_timesheet_plugin['precision']
+    precision = Setting.plugin_redmine_timesheet['precision']
 
     if precision.blank?
       # Set precision to a high number

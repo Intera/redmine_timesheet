@@ -174,7 +174,7 @@ class Timesheet
   end
 
   def self.viewable_users
-    is_plugin_present = Setting.plugin_redmine_timesheet_plugin.present? and (Setting.plugin_redmine_timesheet_plugin['user_status'] == 'all')
+    is_plugin_present = Setting.plugin_redmine_timesheet.present? and (Setting.plugin_redmine_timesheet['user_status'] == 'all')
     if User.current.allowed_to?(:see_all_timesheets, nil, :global => true)
       user_scope = is_plugin_present ? User.all : User.active
     else

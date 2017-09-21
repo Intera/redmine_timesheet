@@ -523,7 +523,7 @@ class TimesheetTest < ActiveSupport::TestCase
 
     context "with project status set to all" do
       setup do
-        Setting.plugin_redmine_timesheet_plugin['project_status'] = 'all'
+        Setting.plugin_redmine_timesheet['project_status'] = 'all'
       end
       
       should 'collect time entries for archived projects' do

@@ -29,12 +29,12 @@ Further modifications are:
 * CSV exports
 
 == Installation and Setup
-1. In your redmine plugins directory, run the command: `git clone https://github.com/arkhitech/redmine_timesheet_plugin.git redmine_timesheet_plugin`
+1. In your redmine plugins directory, run the command: `git clone https://github.com/arkhitech/redmine_timesheet.git redmine_timesheet`
 2. Restart web server
 3. Login and click the Timesheet Link in the top left menu
 
 == Upgrade
-1. Open a shell to your Redmine's plugins/redmine_timesheet_plugin folder
+1. Open a shell to your Redmine's plugins/redmine_timesheet folder
 2. Update your Git copy with `git pull`
 3. Restart Redmine
 

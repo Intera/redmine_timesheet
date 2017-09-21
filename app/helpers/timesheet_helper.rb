@@ -63,7 +63,7 @@ module TimesheetHelper
     style ||= ''
 
     content_tag(:span,
-      link_to_function(image_tag(image, :plugin => "redmine_timesheet_plugin"), js),
+      link_to_function(image_tag(image, :plugin => "redmine_timesheet"), js),
       :class => "toggle-" + issue_id.to_s,
       :style => style
     )
@@ -82,7 +82,7 @@ module TimesheetHelper
     style ||= ''
 
     content_tag(:span,
-      link_to_function(image_tag(image, :plugin => "redmine_timesheet_plugin"), js),
+      link_to_function(image_tag(image, :plugin => "redmine_timesheet"), js),
       :class => "toggle-" + spent_on.to_s,
       :style => style
     )

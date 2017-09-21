@@ -1,4 +1,4 @@
-module RedmineTimesheetPlugin
+module RedmineTimesheet
   module Patches
     module TimeEntryPatch
       def self.included(base)

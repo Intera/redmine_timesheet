@@ -1,9 +1,8 @@
-module RedmineTimesheetPlugin
+module RedmineTimesheet
   module Patches
     module ProjectPatch
       def self.included(base)
         base.extend(ClassMethods)
-
         base.send(:include, InstanceMethods)
         base.class_eval do
           unloadable
@@ -16,7 +15,7 @@ module RedmineTimesheetPlugin
 
                 # Principal#members gets all projects, but #memberships will only
                 # get the active ones
-                if Setting.plugin_redmine_timesheet_plugin['project_status'] == 'all'
+                if Setting.plugin_redmine_timesheet['project_status'] == 'all'
                   project_ids = user.members.collect{|m| m.project_id}
                 else
                   project_ids = user.memberships.collect{|m| m.project_id}
@@ -24,12 +23,12 @@ module RedmineTimesheetPlugin
 
                 {
                   :conditions => [
-                                  "#{Project.table_name}.is_public = :true or #{Project.table_name}.id IN (:project_ids)",
-                                  {
-                                    :true => true,
-                                    :project_ids => project_ids
-                                  }
-                                ]
+                    "#{Project.table_name}.is_public = :true or #{Project.table_name}.id IN (:project_ids)",
+                    {
+                      :true => true,
+                      :project_ids => project_ids
+                    }
+                  ]
                 }
               else
                 {
@@ -45,7 +44,7 @@ module RedmineTimesheetPlugin
 
                 # Principal#members gets all projects, but #memberships will only
                 # get the active ones
-                if Setting.plugin_redmine_timesheet_plugin['project_status'] == 'all'
+                if Setting.plugin_redmine_timesheet['project_status'] == 'all'
                   project_ids = user.members.collect{|m| m.project_id}
                 else
                   project_ids = user.memberships.collect{|m| m.project_id}
@@ -53,12 +52,12 @@ module RedmineTimesheetPlugin
 
                 {
                   :conditions => [
-                                  "#{Project.table_name}.is_public = :true or #{Project.table_name}.id IN (:project_ids)",
-                                  {
-                                    :true => true,
-                                    :project_ids => project_ids
-                                  }
-                                ]
+                    "#{Project.table_name}.is_public = :true or #{Project.table_name}.id IN (:project_ids)",
+                    {
+                      :true => true,
+                      :project_ids => project_ids
+                    }
+                  ]
                 }
               else
                 {
