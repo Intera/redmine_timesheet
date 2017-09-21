@@ -1,4 +1,5 @@
 en:
+  timesheet_label_week_number: Week
   timesheet_title: Timesheet
   timesheet_date_range_label: Period
   timesheet_date_from_label: From

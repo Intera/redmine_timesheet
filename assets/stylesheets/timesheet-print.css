@@ -68,8 +68,39 @@ h3:first-of-type {
 }
 
 tr.total {
+	border-color: #ddd !important;
+	border-style: solid !important;
+	border-width: 0px !important;
+	border-top-width: 1px !important;
+	border-bottom-width: 1px;
+	height: 30px;
 	display: table-row;
   border-top: 1px solid #ddd !important;
+}
+
+tr.week-number {
+	text-align: right;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 10px;
+	display: table-row;
+}
+
+tr.week-number, div.week-number {
+  text-align: right;
+  font-weight: bold;
+}
+
+tr.week-number td {
+  padding-bottom: 5px;
+  padding-top: 10px;
+}
+
+h3 + div.week-number {
+  padding-bottom: 10px;
+	text-align: right;
+  margin-top: -33px;
+  font-size: 16px;
 }
 
 table * {
