@@ -2,6 +2,7 @@ module TimesheetHelper
   include ProjectsHelper
 
   def add_day_total? time_entries, time_entry_counter
+    # if last list entry or spent_on (date) differs from previous entry
     (time_entry_counter == (time_entries.length - 1)) ||
       (time_entries[time_entry_counter + 1].spent_on != time_entries[time_entry_counter].spent_on)
   end
@@ -14,6 +15,20 @@ module TimesheetHelper
       time_entry_counter -= 1
     end
     number_with_precision(hours_sum, :precision => @precision)
+  end
+
+  def add_week_number? time_entries, time_entry_counter
+    # if first list entry or previous spent_on (date) differs
+    (time_entry_counter == 0) ||
+      (time_entries[time_entry_counter - 1].tweek != time_entries[time_entry_counter].tweek)
+  end
+
+  def get_week_number time_entries, time_entry_counter
+    time_entries[time_entry_counter].tweek
+  end
+
+  def time_entry_title time_entry
+    "week: #{time_entry.tweek}"
   end
 
   def showing_users(users)

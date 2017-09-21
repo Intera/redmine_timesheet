@@ -53,19 +53,16 @@ label.select-all {
 	display: inline;
 }
 
-tr.total {
-	border-color: #ddd !important;
-	border-style: solid !important;
-	border-width: 0px !important;
-	border-top-width: 1px !important;
-	border-bottom-width: 1px;
-	height: 30px;
-}
-
-tr.total {
+tr.total, tr.week-number, div.week-number {
 	display: none;
 }
 
 .timesheet-groups {
-	display:none;
+	display: none;
+}
+
+#time_entries table td:nth-child(1),
+#time_entries table th:nth-child(1)
+{
+  display: none;
 }
