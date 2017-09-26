@@ -67,6 +67,18 @@ h3:first-of-type {
 	background-color: #fff !important;
 }
 
+
+table * {
+	text-align: left;
+}
+
+/* right align hours column */
+#time_entries td:nth-child(9),
+#time_entries th:nth-child(9)
+{
+	text-align: right;
+}
+
 tr.total {
 	border-color: #ddd !important;
 	border-style: solid !important;
@@ -101,15 +113,5 @@ h3 + div.week-number {
 	text-align: right;
   margin-top: -33px;
   font-size: 16px;
-}
-
-table * {
-	text-align: left;
-}
-
-/* right align hours column */
-#time_entries td:nth-child(9),
-#time_entries th:nth-child(9)
-{
-	text-align: right;
+	display: block;
 }

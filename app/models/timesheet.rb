@@ -14,8 +14,8 @@ class Timesheet
   # Sort time entries by this field
   attr_accessor :sort
   ValidSortOptions = {
-    :project => 'Project',
     :user => 'User',
+    :project => 'Project',
     :issue => 'Issue',
     :group => 'Group',
     :date => 'Date'
