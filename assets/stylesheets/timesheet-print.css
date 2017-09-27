@@ -54,11 +54,11 @@ table td *, table th {
 	font-weight: normal;
 }
 
-h3 {
+section {
 	page-break-before: always;
 }
 
-h3:first-of-type {
+section:first-of-type {
 	page-break-before: auto;
 }
 
