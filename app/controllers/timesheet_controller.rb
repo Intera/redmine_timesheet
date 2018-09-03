@@ -103,11 +103,11 @@ class TimesheetController < ApplicationController
 
   private
   def get_list_size
-    @list_size = Setting.plugin_redmine_timesheet['list_size'].to_i
+    @list_size = Setting.plugin_redmine_timesheet_plugin['list_size'].to_i
   end
 
   def get_precision
-    precision = Setting.plugin_redmine_timesheet['precision']
+    precision = Setting.plugin_redmine_timesheet_plugin['precision']
 
     if precision.blank?
       # Set precision to a high number

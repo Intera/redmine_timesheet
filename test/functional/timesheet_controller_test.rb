@@ -43,7 +43,7 @@ class ActiveSupport::TestCase
 
     should 'should get the list size from the settings' do
       settings = { 'list_size' => 10, 'precision' => '2' }
-      Setting.plugin_redmine_timesheet = settings
+      Setting.plugin_redmine_timesheet_plugin = settings
       
       instance_eval &block
       assert_equal 10, assigns['list_size']
@@ -51,7 +51,7 @@ class ActiveSupport::TestCase
 
     should 'should get the precision from the settings' do
       settings = { 'list_size' => 10, 'precision' => '2' }
-      Setting.plugin_redmine_timesheet = settings
+      Setting.plugin_redmine_timesheet_plugin = settings
       
       instance_eval &block
       assert_equal 2, assigns['precision']
