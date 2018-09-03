@@ -9,32 +9,37 @@ class TimesheetController < ApplicationController
   helper :issues
   include ApplicationHelper
   helper :timelog
+
   SessionKey = 'timesheet_filter'
 
+#  verify :method => :delete, :only => :reset, :render => {:nothing => true, :status => :method_not_allowed }
+
   def index
-    return unless User.current.allowed_to? :view_time_entries, nil, :global => true
     load_filters_from_session
     unless @timesheet
       @timesheet ||= Timesheet.new
     end
     @timesheet.allowed_projects = allowed_projects
+
     if @timesheet.allowed_projects.empty?
       render :action => 'no_projects'
+      return
     end
   end
 
   def report
-    return unless User.current.allowed_to? :view_time_entries, nil, :global => true
     if params && params[:timesheet]
       @timesheet = Timesheet.new(params[:timesheet])
     else
       redirect_to :action => 'index'
+      return
     end
 
     @timesheet.allowed_projects = allowed_projects
 
     if @timesheet.allowed_projects.empty?
       render :action => 'no_projects'
+      return
     end
 
     if !params[:timesheet][:projects].blank?
@@ -46,7 +51,9 @@ class TimesheetController < ApplicationController
     end
 
     call_hook(:plugin_timesheet_controller_report_pre_fetch_time_entries, { :timesheet => @timesheet, :params => params })
+
     save_filters_to_session(@timesheet)
+
     @timesheet.fetch_time_entries
 
     # Sums
@@ -122,12 +129,10 @@ class TimesheetController < ApplicationController
   end
 
   def allowed_projects
-    # allowed_to? works with the default project-role-permission relationship.
-    # if a user has no active role (for example if all projects are archived) then them has not the permission
-    if User.current.admin? or User.current.allowed_to?(:see_all_timesheets, nil, {:global => true})
-      Project.order('name ASC')
+    if User.current.admin?
+      return Project.order('name ASC')
     else
-      Project.where(Project.visible_condition(User.current)).order('name ASC')
+      return Project.where(Project.visible_condition(User.current)).order('name ASC')
     end
   end
 

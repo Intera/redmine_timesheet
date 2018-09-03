@@ -15,4 +15,4 @@ de:
   label_user_status: "zeige Mitglieder mit dem Status"
   text_active_users: "nur aktive"
   text_all_users: "alle"
-  permission_see_all_timesheets: "Alle Zeiteinträge anzeigen"
+  permission_see_project_timesheets: "Projektstundenzettel anzeigen"
