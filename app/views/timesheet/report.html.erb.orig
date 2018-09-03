@@ -1,0 +1,49 @@
+<div class="contextual">
+  <%= link_to_csv_export(@timesheet) %>
+  <%= permalink_to_timesheet(@timesheet) %>
+</div>
+<h2><%= l(:timesheet_title)%></h2>
+<%= render :partial => 'form' %>
+<%= call_hook(:plugin_timesheet_views_timesheets_report_before_time_entries, { :timesheet => @timesheet }) %>
+
+<%= form_tag({}, { :id => 'time_entries'}) do -%>
+<% if @timesheet.time_entries.length > 0 %>
+<h2><%= l(:label_spent_time) %> (<%= h(number_with_precision(@grand_total, :precision => @precision)) -%> <%= h(l(:field_hours)) -%>)</h2>
+
+<% @timesheet.time_entries.each do |entryname,entry|
+   case @timesheet.sort
+   when :user %>
+<h3><%= h entryname -%> (<%= h number_with_precision(@total[entryname], :precision => @precision) %> <%= h(l(:field_hours)) -%>)</h3>
+<%= render :partial => 'timesheet_group', :locals => {:entry => entry, :name => entryname, :total => @total[entryname] } %>
+<% when :issue %>
+<h3><%= h entryname -%> (<%= h number_with_precision(@total[entryname], :precision => @precision) %> <%= h(l(:field_hours)) -%>)</h3>
+<%= render :partial => 'by_issue', :locals => {:entry => entry, :name => entryname, :total => 0 } %>
+<% else %>
+<h3><%= h entryname -%> (<%= h number_with_precision(@total[entryname], :precision => @precision) %> <%= h(l(:field_hours)) -%>) <%= showing_users(entry[:users]) %></h3>
+<%= render :partial => 'timesheet_group', :locals => {:entry => entry, :name => entryname, :total => @total[entryname] } %>
+
+<% end
+	 end # each
+	 end # length
+	 end # form_tag
+	 -%>
+
+<% content_for(:header_tags) do %>
+<%= javascript_include_tag 'context_menu' %>
+<%= stylesheet_link_tag 'context_menu' %>
+<%= stylesheet_link_tag 'timesheet.css', :plugin => 'redmine_timesheet_plugin', :media => 'all' %>
+<%= stylesheet_link_tag 'timesheet-print.css', :plugin => 'redmine_timesheet_plugin', :media => 'print' %>
+<%= javascript_include_tag 'timesheet.js', :plugin => 'redmine_timesheet_plugin' %>
+<%= call_hook(:plugin_timesheet_views_timesheets_report_header_tags, { :timesheet => @timesheet }) %>
+<% end %>
+
+<<<<<<< HEAD
+<%= context_menu time_entries_context_menu_path %>
+
+<%# TODO: Typo on hook %>
+<%= call_hook(:plugin_timesheet_view_timesheets_report_bottom, { :timesheet => @timesheet }) %>
+<%= call_hook(:plugin_timesheet_views_timesheets_report_bottom, { :timesheet => @timesheet }) %>
+=======
+<div id="context-menu" style="display: none;"></div>
+<%= call_hook(:plugin_timesheet_view_timesheet_report_bottom, { :timesheet => @timesheet }) %>
+>>>>>>> ad5991d0ba1f876cb68b8069f2d9f9b4900fa3fa

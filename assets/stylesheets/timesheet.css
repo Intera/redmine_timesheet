@@ -24,7 +24,8 @@ div#timesheet-form p { padding:0px 10px; float:left; clear:none;}
 #timesheet-form .timesheet-projects select,
 #timesheet-form .timesheet-activities select,
 #timesheet-form .timesheet-users select,
-#timesheet-form .timesheet-groups select {
+#timesheet-form .timesheet-groups select,
+#timesheet-form .timesheet-trackers select {
 	height: 300px;
 	min-width: 200px;
 	border: 1px solid #ddd;

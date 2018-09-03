@@ -2,6 +2,7 @@
   <td align="center"><%= check_box_tag 'ids[]', time_entry.id, false, { :class => 'checkbox' } %></td>
   <td align="center"><%= format_date(time_entry.spent_on) %></td>
   <td align="center"><%= time_entry.user.name %></td>
+  <td align="center"><%= time_entry.issue && time_entry.issue.tracker.name %></td>
   <td align="center"><%= time_entry.activity.name %></td>
   <td align="center"><%= time_entry.project.name %></td>
   <td align="center"><%= time_entry.issue.fixed_version if time_entry.issue %></td>

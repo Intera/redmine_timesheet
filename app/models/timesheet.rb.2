@@ -373,7 +373,7 @@ class Timesheet
       # Append the parent project name
       if project.parent.nil?
         unless logs.empty?
-          self.time_entries[project.to_s] = { :logs => logs, :users => users }
+          self.time_entries[project] = { :logs => logs, :users => users }
         end
       else
         unless logs.empty?

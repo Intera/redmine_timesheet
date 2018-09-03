@@ -15,9 +15,9 @@
           <label for="timesheet_date_from"><%= l(:timesheet_date_from_label)%></label>
         </div>
         <span id="select_timesheet_period_type_2" onclick="$('#timesheet_period_type_2').checked = true;">
-          <%= f.text_field "date_from", :size => 10 %><%= calendar_for('timesheet_date_from') %>
+          <%= f.date_field "date_from", :size => 10 %><%= calendar_for('timesheet_date_from') %>
           <label for="timesheet_date_to"><%= l(:timesheet_date_to_label)%></label>
-          <%= f.text_field "date_to", :size => 10 %><%= calendar_for('timesheet_date_to') %>
+          <%= f.date_field "date_to", :size => 10 %><%= calendar_for('timesheet_date_to') %>
         </span>
       </div>
 
@@ -44,6 +44,10 @@
           <%= select_tag 'timesheet[groups][]', group_options(@timesheet), { :multiple => true, :size => @list_size} %>
         </div>
       <% end %>
+      <div class="timesheet-trackers">
+        <label for="timesheet_trackers_" class="select-all"><%= l(:label_tracker_plural)%></label>
+        <%= select_tag 'timesheet[trackers][]', tracker_options(@timesheet), { :multiple => true, :size => @list_size} %>
+      </div>
       <%= call_hook(:plugin_timesheet_view_timesheet_form, { :timesheet => @timesheet, :params => params, :list_size => @list_size }) %>
       <div class="form-actions">
         <%= submit_tag l(:button_apply),:class => 'button-small' -%>
