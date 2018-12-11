@@ -16,8 +16,6 @@
     <%= call_hook(:plugin_timesheet_views_timesheet_group_header, {}) %>
     <th></th>
   </thead>
-  <tbody>
-    <%= render :partial => "time_entry", :collection => entry[:logs], :locals => { :time_entries => entry[:logs] } %>
-  </tbody>
+  <%= render :partial => "time_entry", :collection => entry[:logs], :locals => { :time_entries => entry[:logs] } %>
 </table>
 <br />
