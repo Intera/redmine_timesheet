@@ -29,6 +29,7 @@ class TimesheetController < ApplicationController
       @timesheet = Timesheet.new(params[:timesheet])
     else
       redirect_to :action => 'index'
+      return
     end
 
     @timesheet.allowed_projects = allowed_projects
@@ -49,29 +50,35 @@ class TimesheetController < ApplicationController
     save_filters_to_session(@timesheet)
     @timesheet.fetch_time_entries
 
-    # Sums
-    @total = { }
+    # collect spent time per project
+    @total = {}
     unless @timesheet.sort == :issue
-      @timesheet.time_entries.each do |project,logs|
-        @total[project] = 0
+      @timesheet.time_entries.each do |project, logs|
+        @total[project] = []
         if logs[:logs]
           logs[:logs].each do |log|
-            @total[project] += log.hours
+            @total[project].push log.hours
           end
         end
       end
     else
       @timesheet.time_entries.each do |project, project_data|
-        @total[project] = 0
+        @total[project] = []
         if project_data[:issues]
           project_data[:issues].each do |issue, issue_data|
-            @total[project] += issue_data.collect(&:hours).sum
+            @total[project].push issue_data.collect(&:hours).sum
           end
         end
       end
     end
 
-    @grand_total = @total.collect{|k,v| v}.inject{|sum,n| sum + n}
+    # sum hours per project
+    @total.each do |project, hours|
+      sum = hours.sum
+      @total[project] = (sum.round - sum).abs < 0.05 ? sum.round : sum
+    end
+
+    @grand_total = @total.collect{|k,v| v}.sum
 
     respond_to do |format|
       format.html { render :action => 'details', :layout => false if request.xhr? }
