@@ -1,9 +1,17 @@
 class TimesheetController < ApplicationController
   unloadable
   layout 'base'
-  before_filter :get_list_size
-  before_filter :get_precision
-  before_filter :get_activities
+
+  if Rails::VERSION::MAJOR >= 4
+    before_action :get_list_size
+    before_action :get_precision
+    before_action :get_activities
+  else
+    before_filter :get_list_size
+    before_filter :get_precision
+    before_filter :get_activities
+  end
+
   helper :sort
   include SortHelper
   helper :issues
