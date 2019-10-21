@@ -12,7 +12,7 @@ compatible with redmine version 4 and 3.
 * grouping of timelogs by project, issue and user
 * access control based on the user's projects and roles
 * permalinks to reports
-* special print style with total hours per day summaries
+* special print style with week numbers and total hours per day
 * csv exports
 * version field in the report table
 * cleaned up form layout
