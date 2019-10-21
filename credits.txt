@@ -1,11 +1,6 @@
 Thanks go to the following people for patches and contributions:
 
-Maintainers
-
 * Eric Davis
-
-Contributors
-
 * Morten Krogh Andersen
 * Peter Chester of Shane and Peter, Inc - Feature sponsorship
 * Anton Dollmaier
