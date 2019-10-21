@@ -5,6 +5,7 @@ compatible with redmine version 4 and 3.
 
 ![form-screenshot](other/screenshots/form.png?raw=true)
 ![result-screenshot](other/screenshots/result.png?raw=true)
+![print-style-screenshot](other/screenshots/print.png?raw=true)
 
 # features
 * filtering and sum of timelogs by date range, projects, activities and users
@@ -33,7 +34,7 @@ compatible with redmine version 4 and 3.
 # license
 gnu gpl v2.
 
-this plugin is a fork of the (original version)[https://github.com/edavis10/redmine-timesheet-plugin] by eric davis and has the same license.
+this plugin is a fork of the [original version](https://github.com/edavis10/redmine-timesheet-plugin) by eric davis and has the same license
 
 # see also
-(redmine time logging app)[https://github.com/Intera/redmine_time_logging_app] - let users log time for any project in one place
+[redmine time logging app](https://github.com/Intera/redmine_time_logging_app) - let users log time for any project in one place
