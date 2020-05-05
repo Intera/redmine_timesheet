@@ -4,8 +4,7 @@ list and filter all timelog entries in redmine.
 compatible with redmine version 4 and 3.
 
 ![form-screenshot](other/screenshots/form.png?raw=true)
-![result-screenshot](other/screenshots/result.png?raw=true)
-![print-style-screenshot](other/screenshots/print.png?raw=true)
+![result-screenshot](other/screenshots/result.png?raw=true) ![print-style-screenshot](other/screenshots/print.png?raw=true)
 
 # features
 * filtering and sum of timelogs by date range, projects, activities and users
