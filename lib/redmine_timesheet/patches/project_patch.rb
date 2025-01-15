@@ -5,7 +5,6 @@ module RedmineTimesheet
         base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
         base.class_eval do
-          unloadable
           # Prefix our named_scopes to prevent collusion
           if Rails::VERSION::MAJOR >= 3
             scope :timesheet_order_by_name, lambda { {:order => 'name ASC'} }

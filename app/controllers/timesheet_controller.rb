@@ -1,5 +1,4 @@
 class TimesheetController < ApplicationController
-  unloadable
   layout 'base'
 
   if Rails::VERSION::MAJOR >= 4
@@ -117,6 +116,7 @@ class TimesheetController < ApplicationController
   end
 
   private
+
   def get_list_size
     @list_size = Setting.plugin_redmine_timesheet['list_size'].to_i
   end
@@ -163,13 +163,27 @@ class TimesheetController < ApplicationController
     end
   end
 
+  def deep_clean(object)
+    case object
+    when Hash
+      object.transform_values { |v| deep_clean(v) }
+    when Array
+      object.map { |v| deep_clean(v) }
+    when String, Integer, Float, NilClass, TrueClass, FalseClass, Symbol
+      object
+    else
+      object.to_s # Convert unsupported objects to strings
+    end
+  end
+
   def save_filters_to_session(timesheet)
     if params[:timesheet]
       # Check that the params will fit in the session before saving
       # prevents an ActionController::Session::CookieStore::CookieOverflow
-      encoded = Base64.encode64(Marshal.dump(params[:timesheet]))
-      if encoded.size < 2.kilobytes # Only use 2K of the cookie
-        session[SessionKey] = params[:timesheet]
+      cleaned_timesheet = deep_clean(params[:timesheet].permit!.to_h)
+      encoded = Base64.encode64(Marshal.dump(cleaned_timesheet))
+      if encoded.size < 2.kilobytes
+        session[SessionKey] = cleaned_timesheet
       end
     end
 

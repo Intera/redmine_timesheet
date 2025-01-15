@@ -84,7 +84,7 @@ class Timesheet
 
   # Gets all the time_entries for all the projects
   def fetch_time_entries
-    self.time_entries = { }
+    self.time_entries = {}
     case self.sort
     when :project
       fetch_time_entries_by_project
@@ -267,7 +267,6 @@ class Timesheet
   end
 
   private
-
 
   def time_entries_for_all_users(project)
     project.time_entries.includes(self.includes).
